@@ -73,27 +73,27 @@ def main():
         </div>
         """
     
-    import base64
+#     import base64
 
-    main_bg = "background.png"
-    main_bg_ext = "png"
+#     main_bg = "background.png"
+#     main_bg_ext = "png"
 
-    side_bg = "background.png"
-    side_bg_ext = "png"
+#     side_bg = "background.png"
+#     side_bg_ext = "png"
 
-    st.markdown(
-    f"""
-    <style>
-    .reportview-container {{
-        background: url(data:image/{main_bg_ext};base64,{base64.b64encode(open(main_bg, "rb").read()).decode()})
-    }}
-    .sidebar .sidebar-content {{
-        background: url(data:image/{side_bg_ext};base64,{base64.b64encode(open(side_bg, "rb").read()).decode()})
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-    )
+#     st.markdown(
+#     f"""
+#     <style>
+#     .reportview-container {{
+#         background: url(data:image/{main_bg_ext};base64,{base64.b64encode(open(main_bg, "rb").read()).decode()})
+#     }}
+#     .sidebar .sidebar-content {{
+#         background: url(data:image/{side_bg_ext};base64,{base64.b64encode(open(side_bg, "rb").read()).decode()})
+#     }}
+#     </style>
+#     """,
+#     unsafe_allow_html=True
+#     )
     st.markdown(html_temp, unsafe_allow_html=True)
 #     movie_user_likes  = st.text_input("Enter the name of the movie:")
     movie=st.multiselect('',df['title'])
