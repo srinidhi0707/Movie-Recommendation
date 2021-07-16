@@ -93,9 +93,9 @@ def main():
     </style>
     """,
     unsafe_allow_html=True
-#     )
+    )
     st.markdown(html_temp, unsafe_allow_html=True)
-#     movie_user_likes  = st.text_input("Enter the name of the movie:")
+
     movie=st.multiselect('',df['title'])
     movie_user_likes = ' '.join([str(elem) for elem in movie])
     print(type(movie_user_likes))
