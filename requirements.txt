@@ -2,3 +2,7 @@ flask
 gunicorn
 sklearn
 pandas
+streamlit
+plotly
+numpy
+base64
