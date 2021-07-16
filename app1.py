@@ -3,6 +3,8 @@ import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import streamlit as st
+import plotly.graph_objects as go
+
 
 st.set_page_config(page_title ="Movie Recommendation",page_icon="🎥")
 ###### helper functions. Use them when needed #######
@@ -63,22 +65,57 @@ def recommend_movies(movie_user_likes):
        return Recomended_movies
 
 
+
 def main():
     html_temp = """
         <div style="background-color:Grey;padding:10px">
-        <h1 style="color:white;text-align:center;">Movie Recommendation </h1>
+        <h1 style="color:white;text-align:center;">Movie Recommendation by Sri</h1>
         </div>
         """
-    st.markdown(html_temp, unsafe_allow_html=True)
-    movie_user_likes  = st.text_input("Enter the name of the movie:")
-    st.success(f'The movies similar to {movie_user_likes} are')
+    
+    import base64
 
-    print(movie_user_likes)
+    main_bg = "background.png"
+    main_bg_ext = "png"
+
+    side_bg = "background.png"
+    side_bg_ext = "png"
+
+    st.markdown(
+    f"""
+    <style>
+    .reportview-container {{
+        background: url(data:image/{main_bg_ext};base64,{base64.b64encode(open(main_bg, "rb").read()).decode()})
+    }}
+    .sidebar .sidebar-content {{
+        background: url(data:image/{side_bg_ext};base64,{base64.b64encode(open(side_bg, "rb").read()).decode()})
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+    )
+    st.markdown(html_temp, unsafe_allow_html=True)
+#     movie_user_likes  = st.text_input("Enter the name of the movie:")
+    movie=st.multiselect('',df['title'])
+    movie_user_likes = ' '.join([str(elem) for elem in movie])
+    print(type(movie_user_likes))
     if st.button("Recommend"):
         result = recommend_movies(movie_user_likes)
-        
-       #  st.table(result)
-        st.table(result)
+        fig = go.Figure(data=[go.Table(
+        header=dict(values=['Recommended Movies to watch'],
+               line_color='black',
+                fill_color='#F63366',
+                align='center',
+                font=dict(color='white', size=18)),
+        cells=dict(values=[result], 
+               line_color='black',
+               fill_color='silver',
+               align='center'))
+        ])
+
+        fig.update_layout(width=700, height=700)
+        st.write(fig)
+       
         
         
 
